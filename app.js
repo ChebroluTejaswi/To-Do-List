@@ -58,6 +58,18 @@ app.post("/",function(req,res){
     res.redirect("/");
 });
 
+app.post("/delete",function(req,res){
+    const checkedItemId = req.body.close;
+    const listName = req.body.listName;
+    Item.findByIdAndRemove(checkedItemId, function(err){
+        if(!err)
+        {
+            console.log("Successfully deleted checked item.");
+            res.redirect("/");
+        }
+    });
+})
+
 //--------------------------------------------------------------------------------- 
 
 app.listen(3000, function() {

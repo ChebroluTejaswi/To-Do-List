@@ -110,13 +110,11 @@
 .todo-item-header input[type="checkbox"] { /* applying this style only to checkboxes*/
     margin: 7px;
 }
-.edit-button{
+.edit-button, .delete-button{
     color:#355C7D;
     margin-right: 5px;
-}
-.delete-button{
-    color:#355C7D;
-    margin-right: 5px;
+    background-color: #EEEEEE;
+    border: none;
 }
 
 /* .................................................. */
