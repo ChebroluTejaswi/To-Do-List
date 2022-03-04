@@ -19,10 +19,10 @@
     <div class="todo-task">
         <form class="item" action="/" method="post">
             <input id="taskInput" type="text" placeholder="Enter your task here" name="newItem" autocomplete="off" required autofocus>
-            <button class="add" type="submit" name="priority" value="low">Add</button>
+            <button class="add" type="submit" name="priority" value="low">Add + </button>
             <button class="priority high highpriority" type="submit" name="priority" value="high">H</button>
             <button class="priority med" type="submit" name="priority" value="med">M</button>
-            <button class="priority low " type="submit" name="priority" value="low">L</button>
+            <button class="priority low " type="submit" name="priority" value="low">E</button>
         </form>
     </div>
 
@@ -35,7 +35,6 @@
                         <div class="todo-item-title"><%= item.name %></div>
                     </div>
                     <div class="todo-item-buttons">
-                        <button class="edit-button" type="submit" name="modify" value=<%= item._id %>><i class="fas fa-edit"></i></button>
                         <button class="delete-button" type="submit" name="remove" value=<%= item._id %>><i class="fas fa-trash"></i></button>
                     </div>
                 </div>
@@ -45,16 +44,19 @@
     <hr>
 
     <div class="todo-info">
-        <p class="todo-info-item">Easy Tasks: <%= easyLeft %></p>
-        <p class="todo-info-item">Medium Tasks: <%= medLeft %></p>
-        <p class="todo-info-item">Hard Tasks: <%= hardLeft %></p>
+        <p class="todo-info-item">low Priority : <%= lowLeft %></p>
+        <p class="todo-info-item">Medium Priority : <%= medLeft %></p>
+        <p class="todo-info-item">high Priority : <%= highLeft %></p>
     </div>
     <hr>
 
     <div class="todo-menu">
-        <button class="btn btn-primary active">All</button>
-        <button class="btn btn-primary" disabled>Active</button>
-        <button class="btn btn-primary" disabled>Completed</button>        
+        <form action="\filter" method="post">
+            <button type="submit" class="btn btn-primary active" name="all" value="all">All</button>
+            <button type="submit" class="btn btn-primary low " name="low" value="low">low</button>
+            <button type="submit" class="btn btn-primary med" name="med" value="med">Medium</button>
+            <button type="submit" class="btn btn-primary high" name="high" value="high">high</button>
+        </form>   
     </div>
 
 </div>

@@ -145,8 +145,16 @@
     margin-bottom: 70px;
 }
 .todo-menu .btn-primary{
-    background-color: #39A2DB;
     border:none;
+    color: white;
+}
+.todo-menu .low,.todo-menu .high,.todo-menu .med{
+    color:#355C7D;
+    border: #355C7D;
+}
+.todo-menu .low:hover,.todo-menu .high:hover,.todo-menu .med:hover{
+    font-weight: bold;
+    color:#355C7D;
 }
 .btn-primary:focus{
     outline: none !important;
