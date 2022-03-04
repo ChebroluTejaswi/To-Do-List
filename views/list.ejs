@@ -13,25 +13,25 @@
 
     <div class="todo-task">
         <form class="item" action="/" method="post">
-            <input type="text" placeholder="Enter your task here" name="newItem" autocomplete="off" required autofocus>
-            <button class="add" type="submit" name="list" >Add</button>
-            <button class="priority high" type="submit" name="high" ></button>
-            <button class="priority med" type="submit" name="med" ></button>
-            <button class="priority low" type="submit" name="low" ></button>
+            <input id="taskInput" type="text" placeholder="Enter your task here" name="newItem" autocomplete="off" required autofocus>
+            <button class="add" type="submit" name="priority" value="low">Add</button>
+            <button class="priority high highpriority" type="submit" name="priority" value="high">H</button>
+            <button class="priority med" type="submit" name="priority" value="med">M</button>
+            <button class="priority low " type="submit" name="priority" value="low">L</button>
         </form>
     </div>
 
     <div class="todo-list">
         <% newItems.forEach(function(item){ %>
-            <form action="/delete" method="POST">
-                <div class="todo-item">
+            <form action="/update" method="POST">
+                <div class="todo-item <%= item.priority %>">
                     <div class="todo-item-header">
-                        <input type="checkbox">
+                        <input type="checkbox" >
                         <div class="todo-item-title"><%= item.name %></div>
                     </div>
                     <div class="todo-item-buttons">
-                        <span class="edit-button"><i class="fas fa-edit"></i></span>
-                        <button class="delete-button" type="submit" name="close" value=<%= item._id %>><i class="fas fa-trash"></i></button>
+                        <button class="edit-button" type="submit" name="modify" value=<%= item._id %>><i class="fas fa-edit"></i></button>
+                        <button class="delete-button" type="submit" name="remove" value=<%= item._id %>><i class="fas fa-trash"></i></button>
                     </div>
                 </div>
             </form>

@@ -66,17 +66,20 @@
 .priority{
     width: 2em !important;
     border-radius: 100% !important;
+    font-weight: 100 !important;
+    margin-right: 5px !important;
+    color:#355C7D !important;
 }
 .low{
     background-color: #EEEEEE !important;
-    margin-right: 5px !important;
 }
 .med{
     background-color: #FFF89A !important;
-    margin-right: 5px !important;
 }
 .high{
     background-color: #ffacac !important;
+}
+.highpriority{
     margin-right: 20px !important;
 }
 /* .................................................. */
@@ -113,7 +116,7 @@
 .edit-button, .delete-button{
     color:#355C7D;
     margin-right: 5px;
-    background-color: #EEEEEE;
+    background-color: #eeeeee00;
     border: none;
 }
 

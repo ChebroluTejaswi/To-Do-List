@@ -11,19 +11,26 @@ app.set('view engine', 'ejs');
 mongoose.connect("mongodb://localhost:27017/todolistDB",{useNewUrlParser: true});
 // Schema
 const itemsSchema = {
-    name: String
+    name: String,
+    priority: String
 }
 // model
 const Item = mongoose.model("Item",itemsSchema);
 const item1 = new Item({
-    name: "Hit the Add button to add a new item."
+    name: "Hit the Add button to add a new item.",
+    priority: "low"
 });
 const defaultItems=[item1];
 const listSchema ={
     name: String,
+    priority: String,
     items: [itemsSchema]
 };
 const List =mongoose.model("List",listSchema);
+
+//--------------------------------------------------------------------------------- 
+
+var itemsLeft=0; 
 
 //--------------------------------------------------------------------------------- 
 
@@ -43,33 +50,44 @@ app.get("/",function(req,res){
             res.redirect("/");
         }
         else{
-            res.render('list', { newItems: foundItems,score:0,itemsleft: 0 })
+            res.render('list', { newItems: foundItems,score:0,itemsleft: foundItems.length })
         }
     });
 });
 
 app.post("/",function(req,res){
 
+    console.log(req.body);
     const itemName=req.body.newItem;
+    const itemPriority=req.body.priority;
     const item = new Item({
-        name: itemName
+        name: itemName,
+        priority: itemPriority
     });
     item.save();
     res.redirect("/");
 });
 
-app.post("/delete",function(req,res){
-    const checkedItemId = req.body.close;
-    const listName = req.body.listName;
-    Item.findByIdAndRemove(checkedItemId, function(err){
-        if(!err)
-        {
-            console.log("Successfully deleted checked item.");
-            res.redirect("/");
-        }
-    });
-})
+app.post("/update",function(req,res){
+    const checkedItemIdRemove = req.body.remove;
+    const checkedItemIdModify = req.body.modify;
 
+    if(checkedItemIdRemove!=undefined)
+    {
+        Item.findByIdAndRemove(checkedItemIdRemove, function(err){
+            if(!err)
+            {
+                console.log("Successfully deleted checked item.");
+                res.redirect("/");
+            }
+        });
+    }
+    else
+    {
+        console.log("Edit function yet to be done!");
+    }
+    
+})
 //--------------------------------------------------------------------------------- 
 
 app.listen(3000, function() {
