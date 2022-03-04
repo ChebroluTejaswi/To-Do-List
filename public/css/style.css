@@ -1,0 +1,41 @@
+/* ----------------------FOOTER------------------ */
+.footer-padding {
+	padding-bottom: 60px;
+}
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	background-color: #F38181;
+}
+.footer a,.footer p {
+	text-decoration: none;
+    margin-bottom: 20px;
+    margin-top: 10px;
+	font-size: 1em;
+    font-weight: bold;
+    color: #fff;
+}
+.copyright{
+    margin-left: 10%;
+}
+.social-icon{
+    margin-right: 10%;
+    text-align: right;
+}
+/* footer design for mobile phones */
+@media only screen and (max-width: 600px) {
+	.copyright{
+        text-align: center;
+        margin-left: 0%;
+    }
+    .social-icon{
+        text-align: center;
+        margin-right: 0%;
+    }
+    .footer a,.footer p {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        font-size: 1em;
+    }
+}
