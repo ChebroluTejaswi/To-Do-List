@@ -1,10 +1,43 @@
 <%- include("header") -%>
 
+<!-- Navbar -->
 <nav class="navbar navbar-expand-sm navbar-dark navbar-fixed-top">
     <div class="container">
         <h1 class="heading">To-Do List</h1>
         <h1 class="heading">Score: <%= score %></h1>
     </div>
 </nav>
+
+<!-- Main page -->
+<div class="container">
+
+    <div class="todo-task">
+        <form class="item" action="/" method="post">
+            <input type="text" placeholder="New Task" name="newItem" autocomplete="off" required autofocus>
+            <button class="add" type="submit" name="list" >Add</button>
+            <button class="priority high" type="submit" name="high" ></button>
+            <button class="priority med" type="submit" name="med" ></button>
+            <button class="priority low" type="submit" name="low" ></button>
+        </form>
+    </div>
+
+    <div class="todo-list">
+        <p>list</p>
+    </div>
+    <hr>
+
+    <div class="todo-info">
+        <input class="todo-info-check" type="checkbox"> Check All
+        <p class="todo-info-item">Items left: <%= itemsleft %></p>
+    </div>
+    <hr>
+
+    <div class="todo-menu">
+        <button class="btn btn-primary active">All</button>
+        <button class="btn btn-primary" disabled>Active</button>
+        <button class="btn btn-primary" disabled>Completed</button>        
+    </div>
+
+</div>
 
 <%- include("footer") -%>
