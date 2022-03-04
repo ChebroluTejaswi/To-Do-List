@@ -8,12 +8,54 @@ app.use(express.static("public"));
 app.set('view engine', 'ejs');
 
 // Connection to mongo database
-// mongoose.connect("mongodb://localhost:27017/todolistDB",{useNewUrlParser: true});
+mongoose.connect("mongodb://localhost:27017/todolistDB",{useNewUrlParser: true});
+// Schema
+const itemsSchema = {
+    name: String
+}
+// model
+const Item = mongoose.model("Item",itemsSchema);
+const item1 = new Item({
+    name: "Hit the Add button to add a new item."
+});
+const defaultItems=[item1];
+const listSchema ={
+    name: String,
+    items: [itemsSchema]
+};
+const List =mongoose.model("List",listSchema);
 
 //--------------------------------------------------------------------------------- 
 
 app.get("/",function(req,res){
-    res.render('list',{score:0,itemsleft: 0});
+
+    Item.find({},function(err, foundItems){
+        if(foundItems.length === 0)
+        {
+            Item.insertMany(defaultItems,function(err){
+            if(err){
+                console.log(err);
+            }
+            else{
+                console.log("Successfully saved your default items to DB");
+            }
+            });
+            res.redirect("/");
+        }
+        else{
+            res.render('list', { newItems: foundItems,score:0,itemsleft: 0 })
+        }
+    });
+});
+
+app.post("/",function(req,res){
+
+    const itemName=req.body.newItem;
+    const item = new Item({
+        name: itemName
+    });
+    item.save();
+    res.redirect("/");
 });
 
 //--------------------------------------------------------------------------------- 

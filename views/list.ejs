@@ -1,7 +1,7 @@
 <%- include("header") -%>
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-sm navbar-dark navbar-fixed-top">
+<nav class="navbar navbar-expand-sm navbar-dark fixed-top ">
     <div class="container">
         <h1 class="heading">To-Do List</h1>
         <h1 class="heading">Score: <%= score %></h1>
@@ -13,7 +13,7 @@
 
     <div class="todo-task">
         <form class="item" action="/" method="post">
-            <input type="text" placeholder="New Task" name="newItem" autocomplete="off" required autofocus>
+            <input type="text" placeholder="Enter your task here" name="newItem" autocomplete="off" required autofocus>
             <button class="add" type="submit" name="list" >Add</button>
             <button class="priority high" type="submit" name="high" ></button>
             <button class="priority med" type="submit" name="med" ></button>
@@ -22,7 +22,20 @@
     </div>
 
     <div class="todo-list">
-        <p>list</p>
+        <% newItems.forEach(function(item){ %>
+            <form action="/delete" method="POST">
+                <div class="todo-item">
+                    <div class="todo-item-header">
+                        <input type="checkbox">
+                        <div class="todo-item-title"><%= item.name %></div>
+                    </div>
+                    <div class="todo-item-buttons">
+                        <span class="edit-button"><i class="fas fa-edit"></i></span>
+                        <span class="delete-button"><i class="fas fa-trash"></i></span>
+                    </div>
+                </div>
+            </form>
+        <% }); %> 
     </div>
     <hr>
 
