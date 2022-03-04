@@ -4,7 +4,12 @@
 <nav class="navbar navbar-expand-sm navbar-dark fixed-top ">
     <div class="container">
         <h1 class="heading">To-Do List</h1>
-        <h1 class="heading">Score: <%= score %></h1>
+        
+            <span><form action="/reset" method="post">
+                <h1 class="heading">Score: <%= score %>
+                <button type="sudmit"><i class="fas fa-redo"></i></button></h1>
+            </form></span>
+        
     </div>
 </nav>
 
@@ -40,8 +45,9 @@
     <hr>
 
     <div class="todo-info">
-        <input class="todo-info-check" type="checkbox"> Check All
-        <p class="todo-info-item">Items left: <%= itemsleft %></p>
+        <p class="todo-info-item">Easy Tasks: <%= easyLeft %></p>
+        <p class="todo-info-item">Medium Tasks: <%= medLeft %></p>
+        <p class="todo-info-item">Hard Tasks: <%= hardLeft %></p>
     </div>
     <hr>
 

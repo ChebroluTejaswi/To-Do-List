@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const { redirect } = require("express/lib/response");
 
 const app = express();
 app.use(bodyParser.urlencoded({extended : true}));
@@ -30,8 +31,10 @@ const List =mongoose.model("List",listSchema);
 
 //--------------------------------------------------------------------------------- 
 
-var itemsLeft=0; 
-
+var easyLeft=0; 
+var medLeft=0;
+var hardLeft=0;
+var score=0;
 //--------------------------------------------------------------------------------- 
 
 app.get("/",function(req,res){
@@ -50,20 +53,31 @@ app.get("/",function(req,res){
             res.redirect("/");
         }
         else{
-            res.render('list', { newItems: foundItems,score:0,itemsleft: foundItems.length })
+            res.render('list', { newItems: foundItems,score:score,easyLeft: easyLeft,hardLeft:hardLeft,medLeft:medLeft })
         }
     });
 });
 
 app.post("/",function(req,res){
 
-    console.log(req.body);
     const itemName=req.body.newItem;
     const itemPriority=req.body.priority;
     const item = new Item({
         name: itemName,
         priority: itemPriority
     });
+    if (itemPriority=="low"){
+        score=score+1;
+        easyLeft=easyLeft+1;
+    }
+    else if (itemPriority=="med"){
+        score=score+2;
+        medLeft=medLeft+1;
+    }
+    else{
+        score=score+3;
+        hardLeft=hardLeft+1;
+    }
     item.save();
     res.redirect("/");
 });
@@ -74,7 +88,20 @@ app.post("/update",function(req,res){
 
     if(checkedItemIdRemove!=undefined)
     {
-        Item.findByIdAndRemove(checkedItemIdRemove, function(err){
+        Item.findByIdAndRemove(checkedItemIdRemove, function(err,foundItem){
+            if (foundItem.priority=="low"){
+                score=score+5;
+                easyLeft=easyLeft-1;
+            }
+            else if (foundItem.priority=="med"){
+                score=score+10;
+                medLeft=medLeft-1;
+            }
+            else{
+                score=score+15;
+                hardLeft=hardLeft-1;
+            }
+
             if(!err)
             {
                 console.log("Successfully deleted checked item.");
@@ -88,6 +115,12 @@ app.post("/update",function(req,res){
     }
     
 })
+
+app.post("/reset",function(req,res){
+    score=0;
+    res.redirect("/");
+});
+
 //--------------------------------------------------------------------------------- 
 
 app.listen(3000, function() {
