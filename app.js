@@ -12,8 +12,9 @@ app.use(bodyParser.urlencoded({
 app.use(express.static("public"));
 app.set('view engine', 'ejs');
 
+const uri = process.env.MONGODB_URI;
 // Connection to mongo database
-mongoose.connect("mongodb://localhost:27017/todolistDB", {
+mongoose.connect(uri, {
     useNewUrlParser: true
 });
 // Schema
@@ -44,7 +45,9 @@ var score = 0;
 //--------------------------------------------------------------------------------- 
 
 app.get("/", function (req, res) {
+    
 
+    console.log(url)
     Item.find({}, function (err, foundItems) {
         if (foundItems.length === 0) {
             Item.insertMany(defaultItems, function (err) {
