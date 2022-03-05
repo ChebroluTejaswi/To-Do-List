@@ -44,11 +44,11 @@ DATABASE=<link>
 ```shell
 node app.js
 ```
-Open the link in browser
+<b>Open the link in browser</b>
 host:localhost port:3000 (http://localhost:3000/)
 
-Usage
+## Usage
 You can use this repository for further developing it and adding your work in it.
 
-Contact 📞
+## Contact 📞
 If you have any doubt feel free to email me or hit me up on LinkedIn
