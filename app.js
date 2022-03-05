@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -12,11 +13,8 @@ app.use(bodyParser.urlencoded({
 app.use(express.static("public"));
 app.set('view engine', 'ejs');
 
-const uri = process.env.MONGODB_URI;
 // Connection to mongo database
-mongoose.connect(uri, {
-    useNewUrlParser: true
-});
+mongoose.connect(process.env.DATABASE, {useNewUrlParser: true});
 // Schema
 const itemsSchema = {
     name: String,
@@ -45,9 +43,6 @@ var score = 0;
 //--------------------------------------------------------------------------------- 
 
 app.get("/", function (req, res) {
-    
-
-    console.log(url)
     Item.find({}, function (err, foundItems) {
         if (foundItems.length === 0) {
             Item.insertMany(defaultItems, function (err) {
