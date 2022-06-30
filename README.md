@@ -47,6 +47,10 @@ node app.js
 <b>Open the link in browser</b>
 host:localhost port:3000 (http://localhost:3000/)
 
+## Interface
+![image](https://user-images.githubusercontent.com/68593617/176741171-314513b0-10c8-45bd-a9d6-f7110494c942.png)
+
+
 ## Usage
 You can use this repository for further developing it and adding your work in it.
 
